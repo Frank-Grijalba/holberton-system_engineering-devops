@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -a | find * -type d -print | wc -l
+ls -lt | head -10
