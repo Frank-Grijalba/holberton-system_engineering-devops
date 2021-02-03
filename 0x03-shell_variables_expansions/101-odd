@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -1 | cat -n | cut -c 6- | grep ^ [13579] | cut -c 3-
+ls -1 | cat -n | cut -c 6- | grep ^[13579] | cut -c 3-
