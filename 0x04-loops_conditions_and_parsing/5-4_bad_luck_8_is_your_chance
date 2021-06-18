@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Chinese culture
+
+count=1
+while [ $count -le 10 ]
+do
+	if [ $count -eq 8 ]
+	then
+		echo "good luck"
+	elif [ $count -eq 4 ]
+	then
+		echo "bad luck"
+	else
+		echo "Holberton School"
+	fi
+	((count++))
+done
