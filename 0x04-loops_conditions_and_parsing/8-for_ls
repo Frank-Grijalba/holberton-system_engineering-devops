@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# ls code
+
+for command in *;
+do
+    echo "$command" | cut -d'-' -f2
+done
