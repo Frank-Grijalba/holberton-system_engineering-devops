@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Kill a process.
+
+trap "echo I am invincible!!!" SIGTERM
+c=0
+while [ $c -lt 1 ]
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
