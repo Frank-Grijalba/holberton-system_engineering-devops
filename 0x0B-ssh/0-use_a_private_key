@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# connect to my server using the ssh holberton public key
+
+ssh -i ~/.ssh/holberton ubuntu@35.190.183.78
