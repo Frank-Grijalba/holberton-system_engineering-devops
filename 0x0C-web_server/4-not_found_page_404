@@ -7,6 +7,7 @@ sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 sudo chown -R ubuntu /var/www/html/
 echo "Holberton School for the win!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
 sudo chown -R ubuntu /etc/nginx/sites-enabled/
 server="server_name _;\n\trewrite ^\/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4t permanent;"
 sudo sed -i "/server_name _;/$server/" /etc/nginx/sites-enabled/default
