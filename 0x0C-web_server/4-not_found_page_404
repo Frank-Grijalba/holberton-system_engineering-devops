@@ -1,5 +1,5 @@
 #!/usr/bin/env bash                                                             
-# script that Install nginx on the web-01 server and configure site with code 301
+# script that Install nginx on the web-01 server and configure site with code 404
 
 sudo apt-get update
 sudo apt-get -y install nginx
@@ -7,7 +7,7 @@ sudo ufw allow 'Nginx HTTP'
 sudo chown -R ubuntu /var/www/html/
 sudo echo "Holberton School for the win!" > /var/www/html/index.html
 sudo echo "Ceci n'est pas une page" > /var/www/html/error404.html
-sudo chown -R ubuntu /etc/nginx/sites-enabled/
-sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4t permanent;' /etc/nginx/sites-enabled/default
-sudo sed -i '/listen 80 default_server;/a error_page 404 /error404.html;' /etc/nginx/sites-enabled/default
+sudo chown -R ubuntu /etc/nginx/sites-available/
+sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4t permanent;' /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server;/a error_page 404 /error404.html;' /etc/nginx/sites-available/default
 sudo service nginx restart
