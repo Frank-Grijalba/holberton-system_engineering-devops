@@ -8,7 +8,6 @@ sudo chown -R ubuntu /var/www/html/
 echo "Holberton School for the win!" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/error404.html
 sudo chown -R ubuntu /etc/nginx/sites-available/
-site="https://www.youtube.com/watch?v=QH2-TGUlwu4t"
-sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me $site permanent;' /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4t permanent;' /etc/nginx/sites-available/default
 sudo sed -i '/listen 80 default_server;/a error_page 404 /error404.html;' /etc/nginx/sites-available/default
 sudo service nginx restart
