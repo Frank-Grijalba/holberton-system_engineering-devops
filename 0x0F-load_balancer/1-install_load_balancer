@@ -3,7 +3,6 @@
 
 sudo apt-get update
 sudo apt-get install -y haproxy
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxyo.cfg
 sudo echo "
 frontend webserver
         bind *: 80
