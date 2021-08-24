@@ -1,0 +1,14 @@
+#!/usr/bin/env bash                                                             
+# script that Install nginx on the web-01 server and configure site with code 404
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo chown -R "$USER" /var/www/html/
+echo "Holberton School for the win!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/error404.html
+sudo chown -R "$USER" /etc/nginx/sites-available/
+sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4t permanent;' /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server;/a error_page 404 /error404.html;' /etc/nginx/sites-available/default
+sudo sed -i "/listen 80 default_server;/a add_header X-Served-By \"$HOSTNAME\";"  /etc/nginx/sites-available/default
+sudo service nginx restart
