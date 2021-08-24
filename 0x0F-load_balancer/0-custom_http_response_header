@@ -1,6 +1,5 @@
 #!/usr/bin/env bash                                                             
 # script that Install nginx on the web-01 server and configure site with code 404
-
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'

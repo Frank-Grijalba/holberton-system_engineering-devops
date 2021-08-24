@@ -1,8 +1,8 @@
 #!/usr/bin/env bash                                                             
 # script that Install HAProxy and configure it for 2 servers
 
-sudo apt-get update
-sudo apt-get install -y haproxy
+sudo apt-get -y update
+sudo apt-get -y install haproxy
 sudo echo "
 frontend webserver
         bind *: 80
@@ -11,5 +11,6 @@ frontend webserver
 backend appserver
         balance roundrobin
         server 2843-web-01 35.190.183.78:80 check
-        server 2843-web-02 34.226.194.149:80 check" | sudo tee /etc/haproxy/haproxy.cfg
+        server 2843-web-02 34.226.194.149:80 check
+" >> /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
