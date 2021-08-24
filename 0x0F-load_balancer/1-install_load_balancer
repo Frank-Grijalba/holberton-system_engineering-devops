@@ -3,8 +3,6 @@
 
 sudo apt-get update
 sudo apt-get install -y haproxy
-sudo chown -R "$USER" /etc/haproxy/
-
 cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxyo.cfg
 sudo echo "
 frontend webserver
@@ -14,5 +12,5 @@ frontend webserver
 backend appserver
         balance roundrobin
         server 2843-web-01 35.190.183.78:80 check
-        server 2843-web-02 34.226.194.149:80 check" | sudo tee -a /etc/haproxy/haproxy.cfg
+        server 2843-web-02 34.226.194.149:80 check" | sudo tee /etc/haproxy/haproxy.cfg
 sudo service haproxy restart
