@@ -11,8 +11,7 @@ global
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
-        maxconn 2048
-        tune.ssl.default-dh-param 2048
+
         # Default ciphers to use on SSL-enabled listening sockets.
         # For more information, see ciphers(1SSL). This list is from:
         #  https://hynek.me/articles/hardening-your-web-servers-ssl-ciphers/
@@ -35,21 +34,21 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend www-http
-   bind *:80
-   reqadd X-Forwarded-Proto:\ http
-   default_backend www-backend
+frontend front-http
+        bind *:80
+        reqadd X-Forwarded-Proto:\ http
+        default_backend www-backend
 
-frontend www-https
-   bind *:443 ssl crt /etc/haproxy/certs/www.creazion.tech.pem
-   reqadd X-Forwarded-Proto:\ https
-   default_backend www-backend
+frontend front-https
+        bind *:443 ssl crt /etc/haproxy/certs/www.creazion.tech.pem
+        reqadd X-Forwarded-Proto:\ https
+        default_backend www-backend
 
 backend www-backend
         http-request redirect scheme https code 301 unless { ssl_fc }
         balance roundrobin
-        server 2843-web-01 35.190.183.78:80 check
-        server 2843-web-02 34.226.194.149:80 check
+        server 2843-web-01  35.190.183.78:80 check
+        server 2843-web-02  34.226.194.149:80 check
 
 backend letsencrypt-backend
         server letsencrypt 127.0.0.1:54321
