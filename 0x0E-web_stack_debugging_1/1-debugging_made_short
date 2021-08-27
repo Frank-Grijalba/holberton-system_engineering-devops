@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# debugging made short
+sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+sudo service nginx start
+sudo kill -9 "$(cat /run/nginx.pid)"
