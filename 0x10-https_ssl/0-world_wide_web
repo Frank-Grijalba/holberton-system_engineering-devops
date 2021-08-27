@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 # show information about subdomains
 
-sub_domains () {
-    if [ "$#" -eq 1 ]; then
-        dig www.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain www is a " $4 " record and points to " $5}'
-        dig lb-01.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain lb-01 is a " $4 " record and points to " $5}'
-        dig web-01.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain web-01 is a " $4 " record and points to " $5}'
-        dig web-02.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain web-02 is a " $4 " record and points to " $5}'
-    elif [ "$#" -eq 2 ]; then
-        
-        dig $2.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain '$2' is a " $4 " record and points to " $5}'
-    fi
-}
-sub_domains $1 $2
+if [ "$#" -eq 2 ]; then
+    dig $2.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain '$2' is a " $4 " record and points to " $5}'
+elif [ "$#" -eq 1 ]; then
+    for subdomain in 'www' 'lb-01' 'web-01' 'web-02'; do
+        dig $subdomain.$1 | grep -A1 'ANSWER SECTION:' | sed -n 2p  | awk '{print "The subdomain '$subdomain' is a " $4 " record and points to " $5}'
+    done
+fi
