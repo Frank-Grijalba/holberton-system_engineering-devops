@@ -4,6 +4,7 @@ returns information about his/her TODO list progress"""
 from urllib import request
 import sys
 import json
+import csv
 
 
 def fetch_data(url):
@@ -16,15 +17,18 @@ def fetch_data(url):
 if __name__ == "__main__":
     user_id = sys.argv[1]
     url_usr = f'https://jsonplaceholder.typicode.com/users/{user_id}'
-    name = fetch_data(url_usr).get('name')
+    username = fetch_data(url_usr).get('username')
     url_todo = f'https://jsonplaceholder.typicode.com/users/{user_id}/todos'
     lst_todo = fetch_data(url_todo)
 
-    tasks_done = [task for task in lst_todo if task['completed'] is True]
-    length_done = len(tasks_done)
-    length_all = len(lst_todo)
+    list_tasks = []
 
-    print(f'Employee {name} is done with tasks({length_done}/{length_all}):')
+    for task in lst_todo:
+        lst = []
+        lst.extend((user_id, username, task['completed'], task['title']))
+        list_tasks.append(lst)
 
-    for task in tasks_done:
-        print('\t {}'.format(task['title']))
+    with open("{}.csv".format(user_id), 'w') as csvfile:
+        writer = csv.writer(csvfile,
+                            quoting=csv.QUOTE_ALL)
+        writer.writerows(list_tasks)
